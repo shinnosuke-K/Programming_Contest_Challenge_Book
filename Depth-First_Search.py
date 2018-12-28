@@ -54,6 +54,7 @@ field = [
     ['.', '.', 'W', '.', '.', '.', '.', '.', '.', '.', 'W', '.']
 ]
 
+
 def dfs_lc(x, y):
     field[x][y] = '.'
 
@@ -65,6 +66,7 @@ def dfs_lc(x, y):
                 dfs_lc(nx, ny)
     return
 
+
 def solve_lc():
     res = 0
     for i in range(0, N):
@@ -75,14 +77,13 @@ def solve_lc():
     print(res)
 
 
-
 if __name__ == '__main__':
 
     # 部分和問題
     if dfs(0, 0):
-       print('Yes')
+        print('Yes')
     else:
-       print('No')
+        print('No')
 
     # Lake Counting
     solve_lc()
