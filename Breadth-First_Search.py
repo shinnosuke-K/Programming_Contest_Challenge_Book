@@ -53,6 +53,7 @@ def bfs_maze():
 
 	print(d[gx][gy])
 
+
 if __name__ == '__main__':
 	bfs_maze()
 
