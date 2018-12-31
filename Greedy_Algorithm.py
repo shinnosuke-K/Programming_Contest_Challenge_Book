@@ -12,6 +12,7 @@ def coin():
 
 	print(ans)
 
+
 # 区間スケジューリング問題
 def schedule():
 	n = 5
@@ -30,6 +31,107 @@ def schedule():
 			t = itv[i][0]
 	print(ans)
 
+
+# 辞書最小問題
+def Best_Cow_Line():
+	S = 'ACDBCB'
+	N = len(S)
+
+	a = 0
+	b = N - 1
+
+	while a <= b:
+		left = False
+		for i in range(b + 1):
+			if S[a + i] < S[b - i]:
+				left = True
+				break
+			elif S[a + i] > S[b - i]:
+				left = False
+				break
+		if left:
+			print(S[a], end='')
+			a += 1
+		else:
+			print(S[b], end='')
+			b -= 1
+	print()
+
+
+# Saruman's Army
+def Saruman_Army():
+	N = 6
+	R = 10
+	X = [1, 7, 15, 20, 30, 50]
+
+	X.sort()
+
+	i = 0
+	ans = 0
+	while i < N:
+		s = X[i]
+		i += 1
+
+		while i < N and X[i] <= s + R:
+			i += 1
+		p = X[i - 1]
+
+		while i < N and X[i] <= p + R:
+			i += 1
+		ans += 1
+
+	print(ans)
+
+
+# Fence Repair
+def Fence_Repair():
+	N = 3
+	L = [8, 5, 8]
+
+	ans = 0
+
+	while N > 1:
+		mil1 = 0
+		mil2 = 1
+
+		if L[mil1] > L[mil2]:
+			mil1, mil2 = mil2, mil1
+
+		for i in range(2, N):
+			if L[i] < L[mil1]:
+				mil2 = mil1
+				mil1 = i
+			elif L[i] < L[mil2]:
+				mil2 = i
+
+		t = L[mil1] + L[mil2]
+		ans += t
+
+		if mil1 == N:
+			mil1, mil2 = mil1, mil2
+
+		L[mil1] = t
+		L[mil2] = L[N - 1]
+		N -= 1
+
+	print(ans)
+
 if __name__ == '__main__':
 	coin()
 	schedule()
+	Best_Cow_Line()
+	Saruman_Army()
+	Fence_Repair()
+
+
+
+
+
+
+
+
+
+
+
+
+
