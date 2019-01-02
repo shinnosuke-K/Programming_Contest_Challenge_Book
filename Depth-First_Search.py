@@ -87,37 +87,3 @@ if __name__ == '__main__':
 
     # Lake Counting
     solve_lc()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
