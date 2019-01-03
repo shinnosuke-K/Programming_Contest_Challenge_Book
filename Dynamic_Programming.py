@@ -131,6 +131,109 @@ def knapsack_2():
 	print(res)
 
 
+# 個数制限付き部分和問題
+def Partial_Sum_Problem():
+	n = 3
+	a = [3, 5, 8]
+	m = [3, 2, 2]
+	K = 18
+	dp = [[False for i in range(K + 1)] for j in range(n + 1)]
+
+	dp[0][0] = True
+
+	for i in range(n):
+		for j in range(K + 1):
+			for k in range(j + 1):
+				if k <= m[i] and k * a[i] <= j:
+					break
+				else:
+					dp[i + 1][j] |= dp[i][j - k * a[i]]
+
+	if dp[n][K]:
+		print('Yes')
+	else:
+		print('No')
+
+
+# 個数制限付き部分和問題 配列再利用
+def Partial_Sum_Problem_reuse():
+	n = 3
+	a = [3, 5, 8]
+	m = [3, 2, 2]
+	K = 18
+	dp = [-1 for i in range(K + 1)]
+	dp[0] = 0
+
+	for i in range(n):
+		for j in range(K + 1):
+			if dp[j] >= 0:
+				dp[j] = m[i]
+			elif j < a[i] or dp[j - a[i]] <= 0:
+				dp[j] = -1
+			else:
+				dp[j] = dp[j - a[i]] - 1
+
+	if dp[K] >= 0:
+		print('Yes')
+	else:
+		print('No')
+
+
+# Longest Increasing Subsequence
+def lis():
+	n = 5
+	a = [4, 2, 3, 1, 5]
+	dp = [0 for i in range(n)]
+
+	res = 0
+	for i in range(n):
+		dp[i] = 1
+		for j in range(i):
+			if a[j] < a[i]:
+				dp[i] = max(dp[i], dp[j] + 1)
+		res = max(res, dp[i])
+	print(res)
+
+
+# 分割数
+def Division_Number():
+	n = 4
+	m = 3
+	M = 10000
+	dp = [[0 for i in range(n + 1)] for j in range(m + 1)]
+	dp[0][0] = 1
+
+	for i in range(1, m + 1):
+		for j in range(n + 1):
+			if j - i >= 0:
+				dp[i][j] = (dp[i - 1][j] + dp[i][j - i]) % M
+			else:
+				dp[i][j] = dp[i - 1][j]
+
+	print(dp[m][n])
+
+
+# 重複組み合わせ問題
+def Overlapping_Combination():
+	n = 3
+	m = 3
+	a = [1, 2, 3]
+	M = 10000
+	dp = [[0 for i in range(m + 1)] for j in range(n + 1)]
+
+	for i in range(n + 1):
+		dp[i][0] = 1
+
+	for i in range(n):
+		for j in range(1, m + 1):
+			if j - 1 - a[i] >= 0:
+				dp[i + 1][j] = (dp[i + 1][j - 1] + dp[i][j] - dp[i][j - 1 - a[i]] + M) % M
+			else:
+				dp[i + 1][j] = (dp[i + 1][j - 1] + dp[i][j]) % M
+
+	print(dp[n][m])
+
+
 if __name__ == '__main__':
 	print(knapsack(0, 5))
 	print(knapsack_ref(0, 5))
@@ -139,37 +242,8 @@ if __name__ == '__main__':
 	knapsack_no_qua()
 	knapsack_no_qua_ref()
 	knapsack_2()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	Partial_Sum_Problem_reuse()
+	Partial_Sum_Problem_reuse()
+	lis()
+	Division_Number()
+	Overlapping_Combination()
