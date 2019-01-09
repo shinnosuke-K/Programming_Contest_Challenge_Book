@@ -41,4 +41,83 @@ class Queue:
 		return ret
 
 # Expedition
+import heapq
+def Expedition():
+	N = 4
+	L = 25
+	P = 10
+	A = [10, 14, 20, 21]
+	B = [10, 5, 2, 4]
+
+	A.append(L)
+	B.append(N)
+	N += 1
+
+	que = []
+
+	ans = 0
+	pos = 0
+	tank = P
+
+	for i in range(N):
+
+		d = A[i] - pos
+
+		while tank - d < 0:
+			if len(que) == 0:
+				# print(-1)
+				return
+
+			tank += heapq.heappop(que) * (-1)
+			ans += 1
+
+		tank -= d
+		pos = A[i]
+		heapq.heappush(que, B[i] * (-1))
+
+	print(ans)
+
+# Fence Repair
+import heapq
+def Fence_Repair():
+	N = 3
+	L = [8, 5, 8]
+
+	ans = 0
+	que = []
+
+	for i in range(N):
+		heapq.heappush(que, L[i])
+
+	while len(que) > 1:
+		l1 = heapq.heappop(que)
+		l2 = heapq.heappop(que)
+
+		ans += l1 + l2
+		heapq.heappush(que, (l1 + l2))
+
+	print(ans)
+
+
+if __name__ == '__main__':
+	Expedition()
+	Fence_Repair()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
