@@ -201,23 +201,3 @@ if __name__ == '__main__':
 	print(union_find(3))
 	unite(1, 8)
 	print(same(3, 8))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
