@@ -99,9 +99,109 @@ def Fence_Repair():
 	print(ans)
 
 
+# 二分木の実装(たぶん)
+class Node():
+	def __init__(self, x):
+		self.val = x
+		self.lch = None
+		self.rch = None
+
+
+def insert(p, x):
+	if p is None:
+		q = Node(x)
+		return q
+	else:
+		if x < p.val:
+			p.lch = insert(p.lch, x)
+			p.rch = insert(p.rch, x)
+			return p
+
+
+def binary_find(p, x):
+	if p is None:
+		return False
+	elif x == p.val:
+		return True
+	elif x < p.val:
+		return binary_find(p.lch, x)
+	else:
+		return binary_find(p.rch, x)
+
+
+def remove(p, x):
+	if p is None:
+		return None
+	elif x < p.val:
+		p.lch = remove(p.lch, x)
+	elif x > p.val:
+		p.rch = remove(p.rch, x)
+	elif p.lch is None:
+		q = p.lch
+		q.rch = p.rch
+		del p
+		return q
+	else:
+		q = Node()
+		q = p.lch
+		while q.rch.rch is not None:
+			q = q.rch
+
+		r = q.rch
+		p.rch, r.lch, r.rch = r.lch, p.lch, p.rch
+		del p
+		return q
+
+
+# Union-Findの実装
+par = []
+rank = []
+def init(n):
+	for i in range(n):
+		par.append(i)
+		rank.append(0)
+
+
+def union_find(x):
+	if par[x] == x:
+		return x
+	else:
+		par[x] = union_find(par[x])
+		return par[x]
+
+
+def unite(x, y):
+	x = union_find(x)
+	y = union_find(y)
+
+	if x == y:
+		return
+
+	if rank[x] < rank[y]:
+		par[x] = y
+	else:
+		par[y] = x
+		if rank[x] == rank[y]:
+			rank[x] += 1
+
+	print(par)
+	print(rank)
+
+
+def same(x, y):
+	return union_find(x) == union_find(y)
+
 if __name__ == '__main__':
 	Expedition()
 	Fence_Repair()
+	root = Node(1)
+	root = insert(root, 1)
+	binary_find(root, 1)
+	init(10)
+	print(union_find(3))
+	unite(1, 8)
+	print(same(3, 8))
+
 
 
 
