@@ -3,45 +3,45 @@ class Queue:
     heap = []
     sz = 0
 
-    def push(x):
-        i = sz
-        sz += 1
+    def push(self, x):
+        i = self.sz
+        self.sz += 1
 
         while i > 0:
             p = (i - 1) / 2
 
-            if heap[p] <= x:
+            if self.heap[p] <= x:
                 break
 
-            heap[i] = heap[p]
+            self.heap[i] = self.heap[p]
             i = p
 
-        heap[i] = x
+        self.heap[i] = x
 
-    def pop():
-        ret = heap[0]
-        sz -= 1
-        x = heap[sz]
+    def pop(self):
+        ret = self.heap[0]
+        self.sz -= 1
+        x = self.heap[self.sz]
 
         i = 0
-        while i * 2 + 1 < sz:
+        while i * 2 + 1 < self.sz:
             a = i * 2 + 1
             b = i * 2 + 2
 
-            if b < sz and heap[b] < heap[a]:
+            if b < self.sz and self.heap[b] < self.heap[a]:
                 a = b
 
-            if heap[a] >= x:
+            if self.heap[a] >= x:
                 break
 
-            heap[i] = heap[a]
+            self.heap[i] = self.heap[a]
             i = a
 
-        heap[i] = x
+        self.heap[i] = x
         return ret
 
-# Expedition
-import heapq
+
+# Expedition import heapq
 def Expedition():
     N = 4
     L = 25
