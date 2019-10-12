@@ -1,4 +1,3 @@
-
 # 部分和問題
 a = [1, 2, 4, 7]
 n = len(a)
@@ -6,13 +5,13 @@ k = 18
 
 
 def dfs(i, s):
-	if i == n:
-		return s == k
-	if dfs(i + 1, s):
-		return True
-	if dfs(i + 1, s + a[i]):
-		return True
-	return False
+    if i == n:
+        return s == k
+    if dfs(i + 1, s):
+        return True
+    if dfs(i + 1, s + a[i]):
+        return True
+    return False
 
 
 # Lake Counting
